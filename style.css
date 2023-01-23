@@ -1,4 +1,59 @@
-h1 {
-  text-align: center;
-  color: blue;
+.container-outbox {
+  position: relative;
+  margin: 80px auto;
+  max-width: 1000px;
+  background: linear-gradient(-225deg, #5d9fff 0%, #b8dcff 48%, #6bbbff 100%);
+  font-family: "Source Code Pro", monospace;
+  font-size: 30px;
+  color: rgb(6, 6, 190);
+  border-radius: 30px;
+  padding: 20px;
+}
+button {
+  position: relative;
+  left: 328px;
+  top: -43px;
+}
+#button-addon2 {
+  transition: all 200ms ease-in-out;
+}
+#button-addon2:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.big-weather-pic {
+  width: 300px;
+  height: auto;
+}
+
+.tomorrow-pic,
+.saturday-pic,
+.sunday-pic {
+  width: 100px;
+  height: auto;
+  margin-left: 40px;
+}
+#currentLocation {
+  font-size: 40px;
+  font-style: bold;
+}
+#currentTemperature {
+  display: block;
+}
+#inputSearching {
+  height: auto;
+  width: 300px;
+}
+#today {
+  font-size: 40px;
+  font-style: bold;
+}
+.city {
+  font-size: 40px;
+  font-style: bold;
+}
+
+.small {
+  font-size: smaller;
 }
