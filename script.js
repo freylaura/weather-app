@@ -1,4 +1,5 @@
-// ----------- Show Date ----------------------------------------------------//
+//show date
+
 function formatDate(date) {
   let hours = date.getHours();
   if (hours < 10) {
@@ -28,12 +29,12 @@ let showTime = document.querySelector("#currentTime");
 let currentTime = new Date();
 showTime.innerHTML = formatDate(currentTime);
 
-//------------------Show Location -----------------------------------------------------//
+//show location
 
 let location = document.querySelector("#searchForm");
 location.addEventListener("submit", showLocation);
 console.log(location);
-//-----------------Show Location Function------------------------------------------//
+//show location function
 function showLocation(event) {
   event.preventDefault();
 
@@ -46,7 +47,7 @@ function showLocation(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showTemp);
 }
-//-------------------------Show Temp-----------------------------------------
+//show temp
 function showTemp(response) {
   let tempElement = document.querySelector("#currentTemperature");
   tempElement.innerHTML = ` ${Math.round(response.data.main.temp)}°`;
@@ -57,7 +58,7 @@ function showTemp(response) {
   let tempMaxElement = document.querySelector("#tempMax");
   tempMaxElement.innerHTML = `${Math.round(response.data.main.temp_max)}°`;
 }
-//------------ function current location --------------------------------------------
+//function current location
 
 function searchLocation(position) {
   let apiKey = "49b631c45785fe73d2a88477803dea22";
