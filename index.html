@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Weather App</title>
-   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+   
     <link
       href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&display=swap"
       rel="stylesheet"
@@ -20,7 +19,7 @@
     />
 
     <link rel="stylesheet" href="style.css" />
-     
+      <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   </head>
   <body>
 <body>
@@ -45,7 +44,7 @@
               id="button-addon2"
              
             >
-              Current
+             I´m here
             </button>
           </form>
         </div>
@@ -56,16 +55,15 @@
           <div class="col-4">
             <br />
             <br />
-            <span id="currentLocation">Berlin<br /> </span
-            ><span id="currentTemperature"> 33°c</span>
+            <span id="currentLocation"></span><span id="currentTemperature"> </span><span> °c </span> <br>
+            <span id="description" class="small"></span>
           </div>
           <div class="col-4">
-            <br /><span id="today"> Today </span><br />
-            <span id="currentTime">2:35 pm </span><br /><span class="small">Humidity:</span><span
-              id="hum"class="small"
-            ></span
-            ><br /><span class="small">Temp min:</span><span id="tempMind"class="small"> </span><br /><span class="small">Temp max:</span><span
-              id="tempMax"class="small"></span>
+            <br />
+            <span id="currentTime">2:35 pm </span><br />
+            <span class="small">Humidity:</span><span id="hum"class="small" ></span><span class="small"> % </span> <br />
+            <span class="small">Temp min:</span><span id="tempMin"class="small"></span><span class="small">°c </span><br />
+            <span class="small">Temp max:</span><span id="tempMax"class="small"></span><span class="small">°c </span>
           
           </div>
         </div>

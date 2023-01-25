@@ -35,12 +35,11 @@ button {
   margin-left: 40px;
 }
 #currentLocation {
+  display: block;
   font-size: 40px;
   font-style: bold;
 }
-#currentTemperature {
-  display: block;
-}
+
 #inputSearching {
   height: auto;
   width: 300px;
@@ -55,5 +54,5 @@ button {
 }
 
 .small {
-  font-size: smaller;
+  font-size: 20px;
 }
