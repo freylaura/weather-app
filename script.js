@@ -1,5 +1,25 @@
-// ----------- Show Date ----------------------------------------------------//
-function formatDate(date) {
+//-----------------Show Location Function------------------------------------------//
+function displayWeatherConditions(response) {
+  console.log(response.data);
+  document.querySelector("#currentLocation").innerHTML = response.data.name;
+  document.querySelector("#currentTemperature").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  document.querySelector("#hum").innerHTML = response.data.main.humidity;
+  document.querySelector("#tempMin").innerHTML = Math.round(
+    response.data.main.temp_min
+  );
+  document.querySelector("#tempMax").innerHTML = Math.round(
+    response.data.main.temp_max
+  );
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].description;
+  document.querySelector("#currentTime").innerHTML = formatDate(
+    response.data.dt * 1000
+  );
+}
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -20,30 +40,7 @@ function formatDate(date) {
     "Saturday",
   ];
   let day = days[dayIndex];
-
   return `${day} ${hours}:${minutes}`;
-}
-
-let showTime = document.querySelector("#currentTime");
-let currentTime = new Date();
-showTime.innerHTML = formatDate(currentTime);
-
-//-----------------Show Location Function------------------------------------------//
-function displayWeatherConditions(response) {
-  console.log(response.data);
-  document.querySelector("#currentLocation").innerHTML = response.data.name;
-  document.querySelector("#currentTemperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
-  document.querySelector("#hum").innerHTML = response.data.main.humidity;
-  document.querySelector("#tempMin").innerHTML = Math.round(
-    response.data.main.temp_min
-  );
-  document.querySelector("#tempMax").innerHTML = Math.round(
-    response.data.main.temp_max
-  );
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].main;
 }
 function searchCity(city) {
   let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
