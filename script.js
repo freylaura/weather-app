@@ -1,23 +1,3 @@
-//-----------------Show Location Function------------------------------------------//
-function displayWeatherConditions(response) {
-  console.log(response.data);
-  document.querySelector("#currentLocation").innerHTML = response.data.name;
-  document.querySelector("#currentTemperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
-  document.querySelector("#hum").innerHTML = response.data.main.humidity;
-  document.querySelector("#tempMin").innerHTML = Math.round(
-    response.data.main.temp_min
-  );
-  document.querySelector("#tempMax").innerHTML = Math.round(
-    response.data.main.temp_max
-  );
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].description;
-  document.querySelector("#currentTime").innerHTML = formatDate(
-    response.data.dt * 1000
-  );
-}
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
@@ -26,10 +6,8 @@ function formatDate(timestamp) {
   }
   let minutes = date.getMinutes();
   if (minutes < 10) {
-    minutes = `0${minutes}`;
+    minutes = `0${minutes};`;
   }
-
-  let dayIndex = date.getDay();
   let days = [
     "Sunday",
     "Monday",
@@ -39,33 +17,68 @@ function formatDate(timestamp) {
     "Friday",
     "Saturday",
   ];
-  let day = days[dayIndex];
+  let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
-function searchCity(city) {
-  let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeatherConditions);
+
+function displayTemperature(response) {
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(response.data.temperature.current);
+  let humidityElement = document.querySelector("#humidity");
+  humidityElement.innerHTML = Math.round(response.data.temperature.humidity);
+  let windElement = document.querySelector("#wind");
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+  descriptionElement = document.querySelector("#description");
+  descriptionElement.innerHTML = response.data.condition.description;
+  cityElement = document.querySelector("#location");
+  cityElement.innerHTML = response.data.city;
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = formatDate(response.data.time * 1000);
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
+  iconElement.setAttribute("alt", response.data.condition.description);
+
+  celsiusTemperature = Math.round(response.data.temperature.current);
+}
+function search(city) {
+  let apiKey = "t839o90730bbac3f30bc244a8bc9470a";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemperature);
 }
 function handleSubmit(event) {
   event.preventDefault();
-  let city = document.querySelector("#inputSearching").value;
-  searchCity(city);
+  let searchingInputElement = document.querySelector("#inputSearching");
+  search(searchingInputElement.value);
 }
+let celsiusTemperature = null;
 
-let standort = document.querySelector("#searchForm");
-standort.addEventListener("submit", handleSubmit);
-
-function searchLocation(position) {
-  let apiKey = "ca5af28648d86b7925348bb9fb85cd3a";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayWeatherConditions);
-}
-function showLocation(event) {
+function displayCelsiusTemperature(event) {
   event.preventDefault();
-  navigator.geolocation.getCurrentPosition(searchLocation);
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = celsiusTemperature;
+  celsiuslink.classList.add("active");
+  fahrenheitlink.classList.remove("active");
+}
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  celsiuslink.classList.remove("active");
+  fahrenheitlink.classList.add("active");
 }
 
-let currentLocationButton = document.querySelector("#button-addon2");
-currentLocationButton.addEventListener("click", showLocation);
-searchCity("Mexico City");
+let form = document.querySelector("#searchForm");
+form.addEventListener("submit", handleSubmit);
+
+let fahrenheitlink = document.querySelector("#fahrenheitlink");
+fahrenheitlink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiuslink = document.querySelector("#celsiuslink");
+celsiuslink.addEventListener("click", displayCelsiusTemperature);
+
+search("Mexico City");

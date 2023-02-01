@@ -23,48 +23,48 @@
   </head>
   <body>
 <body>
-    <div class="container">
+<div class="container">
       <div class="container-outbox">
-        <div class="input-group mb-3 search-for-a-city">
+        <div class="input-group mb-2 search-for-a-city">
           <form id="searchForm">
             <input
               id="inputSearching"
-              type="text"
+              type="search"
               class="form-control"
               placeholder="Search for a city"
               aria-label="city search"
               aria-describedby="button-addon2"
-            />
-            <button class="btn btn-outline-secondary" type="submit" id="C">
+            /> 
+            <button class="btn btn-outline-secondary" type="submit" id="search-btn">
               Search
             </button>
             <button
               class="btn btn-outline-secondary"
-              type="button"
-              id="button-addon2"
+              type="submit"
+              id="current-location-btn"
              
             >
-             I´m here
+              Current
             </button>
           </form>
         </div>
         <div class="row">
           <div class="col-4">
-            <img src="src/day.svg" class="big-weather-pic" />
+            <img src=".." id="icon" />
+          </div>
+          <div class="col-4">
+           <br>
+           
+            <div id="location"></div><div id="date"></div><span id="temperature"></span><small class="units"><a href="#"id="celsiuslink" class="active">°C</a>|<a href="#"id="fahrenheitlink">°F</a></small> 
+            
+            
           </div>
           <div class="col-4">
             <br />
-           
-            <span id="currentLocation"></span><span id="currentTime"></span><br /><span id="currentTemperature"> </span><small class="units">°C|°F </small> <br>
+            <span id="description"class="small"></span>
+            <span class="small">Humidity:</span><span id="humidity"class="small" ></span><span class="small">%</span> <br />
+            <span class="small">Wind:</span><span id="wind"class="small"></span><span class="small">km/h </span>
             
-            <span id="description" class="small"></span>
-          </div>
-          <div class="col-4">
-            <br /><br>
-            
-            <span class="small">Humidity:</span><span id="hum"class="small" ></span><span class="small"> % </span> <br />
-            <span class="small">Temp min:</span><span id="tempMin"class="small"></span><span class="small">°c </span><br />
-            <span class="small">Temp max:</span><span id="tempMax"class="small"></span><span class="small">°c </span>
           
           </div>
         </div>
