@@ -89,3 +89,8 @@ button {
 a {
   text-decoration: none;
 }
+
+.forecast-temperature-max,
+.forecast-temperature-min {
+  font-size: 14px;
+}

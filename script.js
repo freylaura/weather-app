@@ -82,3 +82,17 @@ let celsiuslink = document.querySelector("#celsiuslink");
 celsiuslink.addEventListener("click", displayCelsiusTemperature);
 
 search("Mexico City");
+//////  current location
+function displayCurrentLocation(position) {
+  console.log(position);
+  let apiKey = "t839o90730bbac3f30bc244a8bc9470a";
+  let lon = position.coords.longitude;
+  let lat = position.coords.latitude;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayTemperature);
+}
+
+navigator.geolocation.getCurrentPosition(displayCurrentLocation);
+let getCurrentPosition = document.querySelector("#current-location-btn");
+getCurrentPosition.addEventListener("submit", displayCurrentLocation);
