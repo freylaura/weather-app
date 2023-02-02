@@ -20,6 +20,27 @@ function formatDate(timestamp) {
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  let days = ["Mon", "Tue", "Wed", "Thu"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+        <div class="forecast-date">
+              ${day}</div>
+              <img src="src/rainy-1.svg">
+              <div class="forecast-temperature">
+                <span class="forecast-temperature-max"> 25°</span><span class="forecast-temperature-min"> 2°</span>  
+            </div>
+          </div>
+         `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
 
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
@@ -40,7 +61,6 @@ function displayTemperature(response) {
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   iconElement.setAttribute("alt", response.data.condition.description);
-
   celsiusTemperature = Math.round(response.data.temperature.current);
 }
 function search(city) {
@@ -96,3 +116,5 @@ function displayCurrentLocation(position) {
 navigator.geolocation.getCurrentPosition(displayCurrentLocation);
 let getCurrentPosition = document.querySelector("#current-location-btn");
 getCurrentPosition.addEventListener("submit", displayCurrentLocation);
+
+displayForecast();
