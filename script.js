@@ -21,19 +21,23 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 function displayForecast(response) {
-  console.log(response.data.daily);
+  console.log(response.data.daily.condition);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Mon", "Tue", "Wed", "Thu"];
-  days.forEach(function (day) {
+  let forecast = response.data.daily;
+  forecast.forEach(function (forecastDay) {
     forecastHTML =
       forecastHTML +
       `<div class="col-2">
         <div class="forecast-date">
-              ${day}</div>
+              ${forecastDay.time}</div>
               <img src="src/rainy-1.svg">
               <div class="forecast-temperature">
-                <span class="forecast-temperature-max"> 25°</span><span class="forecast-temperature-min"> 2°</span>  
+                <span class="forecast-temperature-max"> ${Math.round(
+                  forecastDay.temperature.maximum
+                )}°</span><span class="forecast-temperature-min"> ${Math.round(
+        forecastDay.temperature.minimum
+      )}°</span>  
             </div>
           </div>
          `;
@@ -43,7 +47,6 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
 }
 function showForecast(city) {
-  console.log(city);
   let apiKey = "t839o90730bbac3f30bc244a8bc9470a";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
@@ -81,7 +84,6 @@ function handleSubmit(event) {
   let searchingInputElement = document.querySelector("#inputSearching");
   search(searchingInputElement.value);
 }
-let celsiusTemperature = null;
 
 function displayCelsiusTemperature(event) {
   event.preventDefault();
@@ -99,6 +101,7 @@ function displayFahrenheitTemperature(event) {
   celsiuslink.classList.remove("active");
   fahrenheitlink.classList.add("active");
 }
+let celsiusTemperature = null;
 
 let form = document.querySelector("#searchForm");
 form.addEventListener("submit", handleSubmit);
@@ -112,7 +115,6 @@ celsiuslink.addEventListener("click", displayCelsiusTemperature);
 search("Mexico City");
 //////  current location
 function displayCurrentLocation(position) {
-  console.log(position);
   let apiKey = "t839o90730bbac3f30bc244a8bc9470a";
   let lon = position.coords.longitude;
   let lat = position.coords.latitude;
