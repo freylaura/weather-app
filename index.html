@@ -34,6 +34,7 @@
               placeholder="Search for a city"
               aria-label="city search"
               aria-describedby="button-addon2"
+              autocomplete="off"
             /> 
             <button class="btn btn-outline-secondary" type="submit" id="search-btn">
               Search
@@ -49,19 +50,18 @@
           </form>
         </div>
         <div class="row">
-          <div class="col-4">
+          <div class="col-3">
             <img src=".." id="icon" />
           </div>
-          <div class="col-4">
-           <br>
+          <div class="col-5">
+         
            
             <div id="location"></div><div id="date"></div><span id="temperature"></span><small class="units"><a href="#"id="celsiuslink" class="active">°C</a>|<a href="#"id="fahrenheitlink">°F</a></small> 
             
             
           </div>
-          <div class="col-4">
-            <br />
-            <span id="description"class="small"></span>
+          <div class="col-4"><br>
+            <div id="description"class="small"></div>
             <span class="small">Humidity:</span><span id="humidity"class="small" ></span><span class="small">%</span> <br />
             <span class="small">Wind:</span><span id="wind"class="small"></span><span class="small">km/h </span>
             
