@@ -20,27 +20,36 @@ function formatDate(timestamp) {
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
+function getDayforecast(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
 function displayForecast(response) {
-  console.log(response.data.daily.condition);
-  let forecastElement = document.querySelector("#forecast");
-  let forecastHTML = `<div class="row">`;
   let forecast = response.data.daily;
-  forecast.forEach(function (forecastDay) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-        <div class="forecast-date">
-              ${forecastDay.time}</div>
-              <img src="src/rainy-1.svg">
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+          <div class="forecast-date">
+              ${getDayforecast(forecastDay.time)}</div>
+               <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+                 forecastDay.condition.icon
+               }.png" alt="pic-forecastweather" width="45px" />
               <div class="forecast-temperature">
                 <span class="forecast-temperature-max"> ${Math.round(
                   forecastDay.temperature.maximum
-                )}°</span><span class="forecast-temperature-min"> ${Math.round(
-        forecastDay.temperature.minimum
-      )}°</span>  
+                )}°</span><span class="forecast-temperature-min"> 
+                  ${Math.round(forecastDay.temperature.minimum)}°</span>  
             </div>
-          </div>
-         `;
+          </div> `;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -114,6 +123,12 @@ celsiuslink.addEventListener("click", displayCelsiusTemperature);
 
 search("Mexico City");
 //////  current location
+
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(displayCurrentLocation);
+}
+
 function displayCurrentLocation(position) {
   let apiKey = "t839o90730bbac3f30bc244a8bc9470a";
   let lon = position.coords.longitude;
@@ -123,6 +138,5 @@ function displayCurrentLocation(position) {
   axios.get(apiUrl).then(displayTemperature);
 }
 
-navigator.geolocation.getCurrentPosition(displayCurrentLocation);
 let getCurrentPosition = document.querySelector("#current-location-btn");
-getCurrentPosition.addEventListener("submit", displayCurrentLocation);
+getCurrentPosition.addEventListener("click", getCurrentLocation);
