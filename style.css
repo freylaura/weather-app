@@ -1,8 +1,8 @@
 .container-outbox {
   /* position: relative;*/
   margin: 30px auto;
-  max-width: 800px;
-  background: linear-gradient(-225deg, #5d9fff 0%, #b8dcff 48%, #6bbbff 100%);
+  max-width: 700px;
+  background: linear-gradient(-225deg, #5d9fff 0%, #c0dcf8 50%, #0480ec 100%);
   font-family: "Source Code Pro", monospace;
   font-size: 30px;
   color: rgb(6, 6, 190);
@@ -10,6 +10,7 @@
   padding: 20px;
 }
 button {
+  color: yellow;
   position: relative;
   left: 328px;
   top: -43px;
@@ -20,11 +21,6 @@ button {
 #button-addon2:hover {
   cursor: pointer;
   opacity: 0.6;
-}
-
-#icon {
-  width: 200px;
-  height: auto;
 }
 
 .tomorrow-pic,
@@ -62,7 +58,7 @@ button {
 }
 
 .city {
-  font-size: 40px;
+  font-size: 35px;
   font-style: bold;
 }
 
@@ -105,4 +101,12 @@ a {
 
 .weather-forecast {
   text-align: center;
+}
+
+#icon {
+  position: relative;
+  top: -23px;
+  right: 18px;
+  width: 180px;
+  height: auto;
 }
